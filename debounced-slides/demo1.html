@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>Demo 1</title>
+	
+  <style type="text/css">
+    #output {
+      position: fixed;
+      right: 50px;
+      top: 50px;
+      padding: .25em .5em;
+      font: bold 32px "Helvetica Neue", sans-serif;
+      background: #ffc;
+      border: 1px solid #000;
+    }
+  </style>
+  
+  
+	<script src="assets/mootools-core.js" type="text/javascript" charset="utf-8"></script>
+	
+</head>
+
+<body>
+  
+  <div id="output"></div>
+  
+  <div style="height:10000px; width:100px; background:red;"></div>
+
+  <script type="text/javascript" charset="utf-8">
+    var count = 0;
+    
+    document.addEvent('domready', function(){
+      $('output').set('text', 'Performed calls: ' + count);
+      document.addEvent('scroll', callback);
+    });
+    
+    function callback() {
+      count++;
+      $('output').set('text', 'Performed calls: ' + count);
+    }
+  </script>
+</body>
+</html>

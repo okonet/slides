@@ -1,0 +1,24 @@
+{
+  "name": "webpack-sass-preprocessor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "start": "./node_modules/.bin/webpack-dev-server webpack/hot/dev-server ./main.coffee -h -c -d",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "coffee-loader": "^0.7.2",
+    "coffee-script": "^1.8.0",
+    "css-loader": "^0.9.0",
+    "grunt": "^0.4.5",
+    "loader-utils": "^0.2.5",
+    "lodash": "^2.4.1",
+    "sass-loader": "^0.3.0",
+    "style-loader": "^0.8.1",
+    "webpack": "^1.4.9",
+    "webpack-dev-server": "^1.6.5"
+  }
+}

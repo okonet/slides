@@ -1,0 +1,20 @@
+@import "scss_config";
+// body {
+//   @if $view == "desktop" {
+//     background-color: #f8834f;
+//   } @else {
+//     background-color: #73c474;
+//   }
+// }
+
+#demo {
+  position: absolute;
+  left: 50%;
+  margin-left: -$containerWidth / 2;
+  @if $view == "desktop" {
+    background-color: #f8834f;
+  } @else {
+    background-color: #73c474;
+  }
+  width: $containerWidth;
+}

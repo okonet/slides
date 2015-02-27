@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Introduction to webpack</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+	<link href="prism.css" rel="stylesheet">
+	<style>
+		.cover_light {
+			background-color: #fff !important;
+		}
+		.cover_light h2 {
+			font-size: 81px;
+		}
+		.slide pre {
+			padding: 0 1em;
+		}
+		.slide pre code {
+			font-size: .85em;
+			line-height: 1.3;
+		}
+		#multiCompiler pre code {
+			font-size: .65em;
+			line-height: 1.3;
+		}
+	</style>
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>Reactive Development</h1>
+		<p>by Andrey Okonetchnikov, <a href="http://twitter.com/okonetchnikov">@okonetchnikov</a></p>
+	</header>
+
+	<section class="slide cover cover_light" id="Cover"><div>
+		<h2>Reactive Development</h2>
+		<p>Andrey Okonetchnikov<br>
+			<a href="http://okonet.ru">http://okonet.ru</a><br>
+			<a href="http://twitter.com/okonetchnikov">@okonetchnikov</a></p>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Conventional development</h2>
+		<ol>
+			<li class="next">Write code</li>
+			<li class="next">Save</li>
+			<li class="next">Switch to browser</li>
+			<li class="next">Refresh</li>
+			<li class="next">Spot the problem</li>
+			<li class="next">Goto 1</li>
+		</ol>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Reactive development</h2>
+		<ol>
+			<li class="next">Write code</li>
+			<li class="next">Save</li>
+			<li class="next">Spot the problem</li>
+			<li class="next">Goto 1</li>
+		</ol>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Tools</h2>
+		<ol>
+			<li>BrowserSync (http://www.browsersync.io) — reloads the page when the file changes (OK)</li>
+			<li>LiveReload (http://livereload.com) — injects CSS without reloading (Better)</li>
+			<li>...</li>
+		</ol>
+	</div></section>
+
+	<section class="slide" id="WhatIf"><div>
+		<h2>What if...</h2>
+		<p>we could update the page without full refresh (Best)</p>
+	</div></section>
+
+	<section class="slide shout cover" id="react-hot-loader"><div>
+		<h2>React + webpack + react-hot-loader</h2>
+		<img src="pictures/ws_Superman_1024x768.jpg" alt="">
+		<style>
+			#react-hot-loader h2 {
+				color: #FFF;
+				font-size: 3em;
+				text-shadow: 0 0 8px #000;
+			}
+		</style>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>React.js principles</h2>
+		<ol>
+			<li>Just the UI</li>
+			<li>Virtual DOM</li>
+			<li>Data Flow</li>
+		</ol>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>webpack Hot Module Replacement</h2>
+		<figure>
+			<blockquote>
+				<p>Hot Module Replacement (HMR) is a way of exchanging modules in a running application (and adding/removing modules). You basically can update changed modules without a full page reload.</p>
+			</blockquote>
+			<figcaption><a href="http://webpack.github.io/docs/hot-module-replacement-with-webpack.html">http://webpack.github.io/docs/hot-module-replacement-with-webpack.html</a></figcaption>
+		</figure>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Simple setup</h2>
+		<pre><code class="language-bash">
+> npm install --save webpack webpack-dev-server react jsx-loader react-hot-loader
+> webpack-dev-server -d --colors --hot --inline
+		</code></pre>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Configure webpack</h2>
+		<pre><code class="language-javascript">
+// webpack.config.js
+module.exports = {
+	...
+	module: {
+		loaders: [
+			{
+				test: /\.jsx?$/,
+				loaders: ["react-hot", "jsx-loader?harmony"],
+				exclude: /(node_modules|bower_components)/
+			}
+		]
+	}
+};
+		</code></pre>
+	</div></section>
+
+	<section class="slide shout"><div>
+		<h2>Demo...</h2>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>How it is better than...</h2>
+		<img src="pictures/difference.png" alt="Difference between..." width="100%"/>
+	</div></section>
+
+	<section class="slide cover"><div>
+		<h2 style="color: #FFF">How it works?</h2>
+		<img src="pictures/mgc.gif" alt="Magic" width="100%"/>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>No, seriously!</h2>
+		<img src="pictures/dan_abramov_2015-Feb.-20.png" alt="How react-hot-loader works" width="100%"/>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Where do I learn more?</h2>
+		<h3>http://gaearon.github.io/react-hot-loader/</h3>
+	</div></section>
+
+	<section class="slide cover cover_light"><div>
+		<h2>Thanks!</h2>
+		<p><a href="http://okonet.ru">Andrey Okonetchnikov</a>, <a href="http://twitter.com/okonetchnikov">@okonetchnikov</a></p>
+	</div></section>
+
+	<!--
+		To hide progress bar from entire presentation
+		just remove “progress” element.
+		-->
+	<div class="progress"><div></div></div>
+	<script src="shower/shower.min.js"></script>
+	<script src="prism.js"></script>
+</body>
+</html>

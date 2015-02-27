@@ -1,0 +1,6 @@
+.Ball {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid #000;
+    background-color: #f38630;
+}

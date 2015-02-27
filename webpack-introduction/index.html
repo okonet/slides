@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Introduction to webpack</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+	<link href="prism.css" rel="stylesheet">
+	<style>
+		.cover_light {
+			background-color: #fff !important;
+		}
+		.cover_light h2 {
+			font-size: 81px;
+		}
+		.slide pre {
+			padding: 0 1em;
+		}
+		.slide pre code {
+			font-size: .85em;
+			line-height: 1.3;
+		}
+		#multiCompiler pre code {
+			font-size: .65em;
+			line-height: 1.3;
+		}
+	</style>
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>Introduction to webpack</h1>
+		<p>by Andrey Okonetchnikov, <a href="http://twitter.com/okonetchnikov">@okonetchnikov</a></p>
+	</header>
+
+	<section class="slide cover cover_light" id="Cover"><div>
+		<h2>Introduction to webpack</h2>
+		<p>Andrey Okonetchnikov<br>
+			<a href="http://okonet.ru">http://okonet.ru</a><br>
+			<a href="http://twitter.com/okonetchnikov">@okonetchnikov</a></p>
+	</div></section>
+	<section class="slide shout"><div>
+		<h2>What is webpack?</h2>
+	</div></section>
+
+	<section class="slide cover" id="whatIsWebpack"><div>
+		<h2>Webpack is a module bundler</h2>
+		<img src="pictures/what-is-webpack.png" alt="">
+		<style>
+			#whatIsWebpack {
+				background-color: #fff;
+			}
+			#whatIsWebpack img {
+				margin-top: 14%;
+				width: 100%;
+			}
+		</style>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>What is webpack?</h2>
+		<ol>
+			<li>It&rsquo;s like browserify, but better</li>
+			<li class="next">Supports almost every module system: AMD, UMD,  CommonJS etc.</li>
+			<li class="next">Treat static assets as modules</li>
+			<li class="next">Magically splits code into chunks to optimize loading times</li>
+			<li class="next">Has dependency injection &amp; multi-compiling (and lots of other plugins)</li>
+			<li class="next">Integrates with your build system (Grunt/Gulp/etc)</li>
+		</ol>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Starting up</h2>
+		<pre><code class="language-bash">
+> npm install webpack
+> webpack main.js bundle.js
+		</code></pre>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>... but better with config</h2>
+		<pre><code class="language-javascript">
+// webpack.config.js
+module.exports = {
+	entry: './main.js',
+	output: {
+		filename: 'bundle.js'
+	}
+};
+		</code></pre>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>... now you can do</h2>
+		<ul>
+			<li><code>webpack</code> building once for development</li>
+			<li><code>webpack -p</code> for building once for production (minification)</li>
+			<li><code>webpack --watch</code> for continuous incremental build in development</li>
+			<li><code>webpack -d</code> to include source maps</li>
+		</ul>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Require NPM modules</h2>
+		<pre><code class="language-javascript">
+_ = require('lodash');
+_.each([1,2,3], function(item){
+	console.log(item);
+});
+		</code></pre>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Require bower modules</h2>
+		<pre><code class="language-javascript">
+// webpack.config.js
+var webpack = require('webpack');
+module.exports = {
+	...
+	plugins: [
+		new webpack.ResolverPlugin(
+		  new webpack.ResolverPlugin.DirectoryDescription&crarr;
+		  FilePlugin("bower.json", ["main"])
+		)
+	]
+};
+		</code></pre>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Require all kinds of modules</h2>
+		<pre><code class="language-javascript">
+// dependencies can be written in CommonJs
+var commonjs = require("./commonjs");
+// or in AMD
+define(["amd-module", "../file"], function(amdModule, file) {
+    // do stuff
+});
+// using variables
+var template = require("jst!./templates/" + name + ".jst");
+// using context API
+require.context("..", true, /^grunt-[^\/]+\/tasks/[^\/]+$/)
+// all grunt task that are in a modules directory of the parent folder
+
+		</code></pre>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Smart modules resolving</h2>
+		<pre><code class="language-javascript">
+module.exports = {
+  resolve: {
+    // you can now require('file') instead of require('file.coffee')
+    extensions: ['', '.js', '.json', '.coffee'],
+
+    // define where your modules will be resolved
+    moduleDirectories: ['node_modules', 'bower_components'],
+
+	// add aliases for commonly used modules
+    alias: {
+    	component: 'absolute/path/to/component'
+  	}
+  }
+};
+		</code></pre>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Using loaders for static assets</h2>
+		<pre><code class="language-javascript">
+// Returns the image as base64
+require('url!./image.png');
+
+// Multiple loaders can be chained together
+// CSS is loaded in as text
+// Style loader injects it using style tag
+require('style!css!./styles.css');
+
+// Fixes broken module system for JS libraries
+// require it in and assign it to a local variable
+require('imports?foo=lib!lib.js');
+		</code></pre>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Pre- and post-processing with loaders</h2>
+		<pre><code class="language-javascript">
+// webpack.config.js
+module.exports = {
+  module: {
+    loaders: [
+	    { test: /\.coffee$/, loader: 'coffee-loader' },
+	    { test: /\.yml$/, loader: 'yaml-loader' },
+	    { test: /\.scss$/, loaders: [
+          "style-loader",
+          "css-loader",
+          "autoprefixer-loader?browsers=last 2 version",
+          "sass-loader?imagePath=~stylesheets/blocks&includePaths[]=./"
+        ]
+      }
+    ]
+  }
+};
+		</code></pre>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Pre- and post-processing with loaders</h2>
+		<pre><code class="language-javascript">
+// now you can do...
+
+// require *.scss files compiled to css using scss
+// post-processed with autoprefixer
+require('./styles/my-styles');
+
+// require CoffeeScript compiled to JavaScript
+require('./coffescripts/module');
+
+// require yaml files compiled to JavaScript object
+require('./ymls/my_yaml')
+		</code></pre>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Async Loading &amp; Code Splitting</h2>
+		<pre><code class="language-javascript">
+require('./initial_module');
+require.ensure([], function() {
+	// A second file will be created automatically here
+	require('./second_module');
+});
+		</code></pre>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Async Loading &amp; Code Splitting</h2>
+		<ol>
+			<li>Works with any kind of modules</li>
+			<li class="next">You can determine when CSS/images are loaded!</li>
+			<li class="next">Automatically splits your code into <code>chunks</code></li>
+			<li class="next">Works for multiple entry points</li>
+			<li class="next">Check out <a href="https://github.com/webpack/docs/wiki/optimization">https://github.com/webpack/docs/wiki/optimization</a></li>
+		</ol>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Dependency injection</h2>
+		<pre><code class="language-javascript">
+// webpack.config.js
+var webpack = require("webpack");
+module.exports = {
+	plugins: [
+		// plugin injects free variables into your code
+		// without using global scope
+		new webpack.DefinePlugin({
+		    VERSION: JSON.stringify("5fa3b9"),
+		    BROWSER_SUPPORTS_HTML5: true,
+		    TWO: "1+1",
+		    "typeof window": JSON.stringify("object")
+		})
+	]
+};
+		</code></pre>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Dependency injection</h2>
+		<pre><code class="language-javascript">
+if(DEBUG)
+    console.log('Debug info')
+if(PRODUCTION)
+    console.log('Production log')
+		</code></pre>
+		<pre><code class="language-javascript">
+if(false)
+    console.log('Debug info')
+if(true)
+    console.log('Production log')
+		</code></pre>
+		<pre><code class="language-javascript">
+console.log('Production log')
+		</code></pre>
+	</div></section>
+
+	<section class="slide" id="multiCompiler"><div>
+		<h2>Multi-compiler</h2>
+		<pre><code class="language-javascript">
+// webpack.config.js
+module.exports = [{
+		name: "mobile",
+		entry: "./example",
+		output: "mobile.js",
+		plugins: [
+			new webpack.DefinePlugin({
+				ENV: JSON.stringify("mobile")
+			})
+		]
+	},
+	{
+		name: "desktop",
+		entry: "./example",
+		output: "desktop.js",
+		plugins: [
+			new webpack.DefinePlugin({
+				ENV: JSON.stringify("desktop")
+			})
+		]
+	}];
+		</code></pre>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Multi-compiler</h2>
+		<pre><code class="language-javascript">
+// in your code
+$ = if (ENV === "desktop") {
+	require('jquery');
+} else {
+	require('zepto');
+}
+		</code></pre>
+		<p>Will produce 2 separate bundles with different dependencies...</p>
+	</div></section>
+
+	</div></section>
+	<section class="slide shout"><div>
+		<h2>Developer Tools</h2>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Hot Module Replacement</h2>
+		<figure>
+			<blockquote>
+				<p>Hot Module Replacement (HMR) is a way of exchanging modules in a running application (and adding/removing modules). You basically can update changed modules without a full page reload.</p>
+			</blockquote>
+			<figcaption><a href="http://webpack.github.io/docs/hot-module-replacement-with-webpack.html">http://webpack.github.io/docs/hot-module-replacement-with-webpack.html</a></figcaption>
+		</figure>
+	</div></section>
+	<section class="slide shout"><div>
+		<h2>Demo!</h2>
+	</div></section>
+	<section class="slide shout" id="SeeMore"><div>
+		<h2><a href="https://github.com/webpack/webpack">Webpack on GitHub</a></h2>
+		<style>
+			#Picture h2 {
+				color:#FFF;
+				}
+			#SeeMore h2 {
+				font-size:100px
+				}
+			#SeeMore img {
+				width:0.72em;
+				height:0.72em;
+				}
+		</style>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Some nice resources to start with</h2>
+		<ol>
+			<li><a href="http://webpack.github.io">http://webpack.github.io</a></li>
+			<li><a href="https://github.com/petehunt/webpack-howto">https://github.com/petehunt/webpack-howto</a></li>
+		</ol>
+	</div></section>
+
+	<section class="slide cover cover_light"><div>
+		<h2>Thanks!</h2>
+		<p><a href="http://okonet.ru">Andrey Okonetchnikov</a>, <a href="http://twitter.com/okonetchnikov">@okonetchnikov</a></p>
+	</div></section>
+
+
+	<!--
+		To hide progress bar from entire presentation
+		just remove “progress” element.
+		-->
+	<div class="progress"><div></div></div>
+	<script src="shower/shower.min.js"></script>
+	<script src="prism.js"></script>
+</body>
+</html>

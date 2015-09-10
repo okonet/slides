@@ -4,10 +4,10 @@ import BallApp from './ball/BallApp.js'
 let App = React.createClass({
     render() {
         return <BallApp/>
-        //null
-        //return (
-        //    <h1>Hello Adspired!</h1>
-        //)
+        // null
+        // return (
+        //    <h1>Hello world!</h1>
+        // )
 
     }
 })

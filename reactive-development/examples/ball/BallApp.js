@@ -1,7 +1,7 @@
 import React from 'react'
 import Ball from './Ball.js'
 
-let BallApp = React.createClass({
+export default React.createClass({
 
     getInitialState() {
         return {
@@ -24,8 +24,7 @@ let BallApp = React.createClass({
     },
 
     componentDidUpdate() {
-        // Schedule next frame
-        this.play()
+        this.play() // Schedule next frame
     },
 
     tick() {
@@ -50,8 +49,28 @@ let BallApp = React.createClass({
         this.raf = window.requestAnimationFrame(this.tick)
     },
 
+    getPositionForTime(x1, y1, radius, time) {
+        const dt = time / 1000
+        const xMax = this.state.width - radius * 2 - 2
+        const yMax = this.state.height - radius * 2 - 2
+
+        let x = x1 + Math.sin(dt) * 150
+        let y = y1 + Math.cos(dt) * 150
+
+        x = Math.min(x, xMax)
+        x = Math.max(x, 0)
+
+        y = Math.min(y, yMax)
+        y = Math.max(y, 0)
+
+        return {x, y}
+    },
+
     render() {
-        let {time, width, height}= this.state
+        const {time, width, height}= this.state
+        const balls = [
+            {x: 0, y: 0, radius: 20}
+        ]
 
         return (
             <div>
@@ -60,17 +79,21 @@ let BallApp = React.createClass({
                     <button onClick={this.stop}>Stop</button>
                     <button onClick={this.play}>Play</button>
                 </section>
-                <Ball
-                    time={time}
-                    windowWidth={width}
-                    windowHeight={height}
-                />
+                {
+                    balls.map(ball => {
+                        const {x, y} = this.getPositionForTime(ball.x, ball.y, ball.radius, time)
+                        return <Ball
+                            x={x}
+                            y={y}
+                            radius={ball.radius}
+                        />
+                    })
+                }
             </div>
         )
     }
 })
 
-export default BallApp
 
 
 

@@ -1,0 +1,10 @@
+{
+  "name": "My project",
+  "version": "0.0.1",
+  "scripts": {
+    "eslint-staged": "eslint-staged",
+    "stylelint-staged": "stylelint-staged"
+  },
+  "pre-commit": [ "eslint-staged", "stylelint-staged" ]
+  "devDependencies: {}
+}

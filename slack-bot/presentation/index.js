@@ -104,7 +104,7 @@ export default class Presentation extends React.Component {
                     </Slide>
 
                     <Slide transition={["slide"]}>
-                        <Heading caps size={4}>To here</Heading>
+                        <Heading caps size={4}>After</Heading>
                         <Image src={images.after.replace("/", "")} width="100%" />
                     </Slide>
 

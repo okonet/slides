@@ -1,0 +1,38 @@
+const app = require('express')()
+app.route('/code')
+    .get((req, res) => {
+        res.sendStatus(200)
+    })
+    .post(bodyParser.urlencoded({ extended: true }), (req, res) => {
+        if (req.body.token !== SLACK_VERIFY_TOKEN) {
+            return res.sendStatus(401)
+        }
+
+        const { text, team_id } = req.body
+
+        // Handle empty request
+        if (!text) {
+            return res.json({
+                response_type: 'ephemeral',
+                text: EMPTY_REQUEST
+            })
+        }
+
+        // Handle any help requests
+        if (text === 'help') {
+            return res.json({
+                response_type: 'ephemeral',
+                text: HELP_MESSAGE
+            })
+        }
+
+        ...
+
+        } else {
+            return res.json({
+                response_type: 'ephemeral',
+                text: UNRECOGNIZED_REQUEST
+            })
+        }
+
+    })

@@ -38,7 +38,9 @@ require("spectacle/lib/themes/default/index.css");
 
 const images = {
     csLogo: require('../assets/CS-logo_512x512.png'),
-    screenshot: require('../assets/CS-screenshot.png')
+    screenshot: require('../assets/CS-screenshot.png'),
+    changelog: require('../assets/changelog-screen.png'),
+    github: require('../assets/gh-screen.png')
 };
 
 preloader(images);
@@ -83,18 +85,18 @@ export default class Presentation extends React.Component {
                     </Slide>
 
                     <Slide transition={["slide"]}>
-                        <Image src={images.csLogo} height="500"/>
+                        <Image src={images.csLogo.replace("/", "")} height="500"/>
                         <Link href="http://colorsnapper.com/">
                             <Text textColor="secondary">ColorSnapper 2</Text>
                         </Link>
                     </Slide>
 
                     <Slide transition={["slide"]}>
-                        <Image src={require('../assets/CS-screenshot.png')} width="100%"/>
+                        <Image src={images.screenshot.replace("/", "")} width="100%"/>
                     </Slide>
 
                     <Slide transition={["slide"]}>
-                        <Image src={require('../assets/changelog-screen.png')} width="100%"/>
+                        <Image src={images.changelog.replace("/", "")} width="100%"/>
                     </Slide>
 
                     <Slide transition={["zoom", "fade"]}>
@@ -103,7 +105,7 @@ export default class Presentation extends React.Component {
                     </Slide>
 
                     <Slide transition={["slide"]}>
-                        <Image src={require('../assets/gh-screen.png')} width="100%"/>
+                        <Image src={images.github.replace("/", "")} width="100%"/>
                     </Slide>
 
                     <Slide transition={["fade"]} bgColor="secondary" textColor="primary">

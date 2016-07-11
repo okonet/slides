@@ -1,0 +1,14 @@
+const metalsmith = require('metalsmith')
+const remote = require('metalsmith-remote-json-to-files')
+
+metalsmith(__dirname)
+    .use(remote({
+        url: 'https://api.github.com/repos/okonet/metalsmith-remote-json-to-files/releases',
+        "transformOpts": {
+            filename: '${tag_name}.html',
+            contents: '${body}'
+        }
+    }))
+    .build(function(err) {
+        if (err) throw err;
+    })

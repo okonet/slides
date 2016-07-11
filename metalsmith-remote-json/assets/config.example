@@ -1,0 +1,13 @@
+{
+  "source": "src",
+  "destination": "build",
+  "plugins": {
+    "metalsmith-remote-json-to-files": {
+      "url": "https://api.github.com/repos/okonet/metalsmith-remote-json-to-files/releases",
+      "transformOpts": {
+        "filename": "${tag_name}.html",
+        "contents": "${body}"
+      }
+    }
+  }
+}

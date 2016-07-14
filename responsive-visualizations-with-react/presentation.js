@@ -12,8 +12,6 @@ import demo2Code from 'raw!./examples/demo2';
 
 import demo3 from 'babel!./examples/demo3';
 import demo3Code from 'raw!./examples/demo3';
-
-import demo3Explicit from 'babel!./examples/demo3-explicit';
 import demo3ExplicitCode from 'raw!./examples/demo3-explicit';
 
 import demoSvg from 'babel!./examples/demo-svg';
@@ -21,6 +19,9 @@ import demoSvgCode from 'raw!./examples/demo-svg';
 
 import demoHtml from 'babel!./examples/demo-html';
 import demoHtmlCode from 'raw!./examples/demo-html';
+
+import demoCss from 'babel!./examples/demo-css';
+import demoCssCode from 'raw!./examples/demo-css';
 
 import "css/theme.css";
 
@@ -63,6 +64,15 @@ export default () =>
         </div>
       </Slide>
 
+      <Slide className="picture">
+        <div className="place text-centered">
+          <h2>
+            <a href="http://status.postmarkapp.com" className="link">http://status.postmarkapp.com</a>
+          </h2>
+        </div>
+        <img src={require('./assets/status-responsive.gif')} alt="" className="cover" />
+      </Slide>
+
       <Slide>
         <h2>Simple chart</h2>
         {demo1}
@@ -81,6 +91,10 @@ export default () =>
       <Slide>
         <h2>Resizeable chart?</h2>
         {demo2}
+      </Slide>
+
+      <Slide>
+        <h2 className="place emoji">🙄</h2>
       </Slide>
 
       <Slide>
@@ -106,6 +120,10 @@ export default () =>
       <Slide>
         <h2>Resizeable chart!</h2>
         {demo3}
+      </Slide>
+
+      <Slide>
+        <h2 className="place emoji">🙌</h2>
       </Slide>
 
       <Slide className="code_small">
@@ -140,6 +158,20 @@ export default () =>
       <Slide>
         <h2>Works with any element</h2>
         {demoHtml}
+      </Slide>
+
+      <Slide className="code_small">
+        <h2>Reacts on any CSS change</h2>
+        <Code code={demoCssCode} lang="jsx" />
+      </Slide>
+
+      <Slide>
+        <h2>Reacts on any CSS change</h2>
+        {demoCss}
+      </Slide>
+
+      <Slide>
+        <p className="place emoji">😎</p>
       </Slide>
 
       <Slide>

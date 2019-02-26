@@ -1,0 +1,143 @@
+import { Head } from 'mdx-deck'
+import { CodeSurfer } from "mdx-deck-code-surfer"
+import { Image } from 'mdx-deck'
+
+<Head>
+  <title>Focus Management in React Pt. I</title>
+</Head>
+
+# 👋, my name is Andrey
+
+## @okonetchnikov
+
+---
+
+<Image src="./assets/React-Vienna.svg" />
+
+---
+
+# 🚫💩 lint-staged
+
+<https://github.com/okonet/lint-staged>
+
+---
+
+<Image src="./assets/lint-staged-pr.png" />
+
+---
+
+<Image src="./assets/lint-staged-feedback.png" />
+
+---
+
+<https://hackernoon.com/announcing-lint-staged-with-support-for-partially-staged-files-abc24a40d3ff>
+
+---
+
+# Focus Management in ⚛︎
+
+---
+
+## What is focus?
+
+---
+
+```jsx
+<input type="text" placeholder="I'm an input" />
+```
+
+---
+
+<input type="text" placeholder="I'm an input" />
+
+---
+
+<input type="text" placeholder="I'm an input" style={{
+    borderRadius: '4px'
+}} />
+
+---
+
+import Stack from 'stack-styled'
+
+<Stack>
+    <input type="text" placeholder="Input 1" />
+    <input type="text" placeholder="Input 2" />
+    <input type="text" placeholder="Input 3" />
+</Stack>
+
+---
+
+## Let's make it _look_ good!
+
+---
+
+```css
+*:focus {
+    outline: none;
+}
+```
+---
+
+import InputWithoutFocus from './components/InputWithoutFocus'
+
+<Stack gap={4}>
+    <InputWithoutFocus placeholder="Good looking input 1" />
+    <InputWithoutFocus placeholder="Good looking input 2" />
+</Stack>
+
+---
+
+# ⛔️ Don't do that!
+
+<https://a11yproject.com/posts/never-remove-css-outlines/>
+
+---
+
+## Let's make it _work_ & _look_ good!
+
+---
+
+import Input from './components/Input'
+
+<Stack gap={4}>
+    <Input placeholder="Accessible input 1" />
+    <Input placeholder="Accessible input 2" />
+</Stack>
+
+---
+
+## How does it work?
+
+---
+
+<CodeSurfer
+  title="Focus Ring"
+  code={require("!raw-loader!./components/Input.js")}
+  lang="javascript"
+  showNumbers={false}
+  dark={false}
+  steps={[
+    { notes: "The Input component" },
+    { range: [7, 9], notes: "That uses a mixin!" },
+  ]}
+/>
+
+---
+
+<CodeSurfer
+  title="Focus Ring"
+  code={require("!raw-loader!./components/mixins.js")}
+  lang="javascript"
+  showNumbers={false}
+  dark={false}
+  steps={[
+    { notes: "Mixins for styled-components"},
+    { range: [6, 16], notes: "This creates a fancy box shadow" },
+    { range: [29, 40], notes: "This creates a removes outline and adds box shadow" },
+  ]}
+/>
+
+---
+
+# 🙌

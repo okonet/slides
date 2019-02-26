@@ -1,0 +1,22 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "mdx-deck deck.js",
+    "build": "mdx-deck build deck.js",
+    "pdf": "mdx-deck pdf deck.js",
+    "image": "mdx-deck screenshot deck.js",
+    "help": "mdx-deck"
+  },
+  "devDependencies": {
+    "mdx-deck": "^1.6.7",
+    "raw-loader": "^1.0.0",
+    "stack-styled": "^0.1.0"
+  },
+  "name": "react-focus-management",
+  "version": "1.0.0",
+  "dependencies": {
+    "mdx-deck-code-surfer": "^0.5.5",
+    "polished": "^3.0.0",
+    "react-simple-focus-within": "^1.1.4"
+  }
+}

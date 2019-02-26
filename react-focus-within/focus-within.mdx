@@ -1,0 +1,155 @@
+import { Head } from 'mdx-deck'
+import { CodeSurfer } from "mdx-deck-code-surfer"
+import { Image } from 'mdx-deck'
+
+<Head>
+  <title>Focus Management in React Pt. II</title>
+</Head>
+
+# `:focus-within`
+
+---
+
+> The `:focus-within` pseudo-class applies to any element for which the `:focus` pseudo class applies as well as to an element whose descendant in the flat tree (including non-element nodes, such as text nodes) matches the conditions for matching `:focus`.
+
+<https://www.w3.org/TR/selectors-4/#the-focus-within-pseudo>
+
+---
+
+import Form from './components/Form'
+import Input from './components/Input'
+
+<Form>
+    <Input type="text" placeholder="Input 1" />
+    <Input type="text" placeholder="Input 2" />
+</Form>
+
+---
+
+```jsx
+const Form = styled('form')`
+  padding: 2rem;
+  
+  &:focus-within {
+    background: yellow;    
+  }
+`;
+```
+
+---
+
+# How about JS API for it?
+
+## Just use the Platform™!
+
+---
+
+<Image src="./assets/laugh.gif" />
+
+
+---
+
+## Why would you even need it?
+
+---
+
+import { Example1 } from './example.js'
+
+<Example1 />
+
+---
+
+<CodeSurfer
+  title="react-focus-within example"
+  code={require("!raw-loader!./example.js")}
+  lang="jsx"
+  showNumbers={false}
+  dark={false}
+  steps={[
+    { notes: "The simple example" },
+    { lines: [7, 9], notes: "We just wrap our form into FocusWithin" },
+    { lines: [8], notes: "and use render props to pass down the state" },
+    { range: [13, 14], notes: "so you can react when it changes" },
+    { lines: [20], notes: "Cool thing you now can change the whole UI" },
+  ]}
+/>
+
+---
+
+## Turns out, there is no JS API for `:focus-within`
+
+---
+
+## so I decided to build one with React!
+
+---
+
+## Meet `react-simple-focus-within`
+
+<https://github.com/okonet/react-simple-focus-within>
+
+---
+
+<CodeSurfer
+  title="react-simple-focus-within"
+  code={require("!raw-loader!./initialVersion.js")}
+  lang="jsx"
+  showNumbers={false}
+  dark={false}
+  steps={[
+    { notes: "The FocusWithin component" },
+    { range: [71, 73], notes: "that uses the Platform™" },
+    { lines: [72], notes: "that uses the Platform™" },
+  ]}
+/>
+
+---
+
+<Image src="./assets/h5-fail.gif" />
+
+---
+
+<Image src="./assets/safari.png" />
+
+---
+
+<Image src="./assets/pr.png" />
+
+---
+
+<Image src="./assets/h5.gif" />
+
+---
+
+# _Demo_
+
+---
+
+`npm install react-simple-focus-within`
+
+<https://github.com/okonet/react-simple-focus-within>
+
+---
+
+## Why is it called "simple"?
+
+---
+
+<https://github.com/ferdaber/react-focus-within>
+
+---
+
+# 🤷‍♂️
+
+---
+
+<Image src="./assets/rfw-gh.png" />
+
+---
+
+# Thank you!
+
+### [github.com/okonet](https://github.com/okonet)
+### [@okonetchnikov](https://twitter.com/okonetchnikov)
+
+
